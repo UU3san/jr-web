@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会社概要｜日本総合教育舎</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 会社概要テーブル */
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      font-size: 0.9rem;
+    }
+    .company-table th {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      padding: 14px 20px;
+      font-weight: 700;
+      text-align: left;
+      width: 30%;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .company-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.85;
+    }
+    .company-table tr:last-child th,
+    .company-table tr:last-child td { border-bottom: none; }
+
+    /* 地図エリア */
+    .map-area {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-top: 32px;
+    }
+    .map-placeholder {
+      background: var(--blue-light);
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue-dark);
+      font-size: 0.9rem;
+      gap: 12px;
+    }
+    .map-placeholder .map-icon { font-size: 2.5rem; }
+
+    /* 交通アクセス */
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 28px;
+    }
+    .access-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      border-left: 4px solid var(--blue);
+    }
+    .access-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 8px;
+    }
+    .access-card p {
+      font-size: 0.84rem;
+      color: #444;
+      line-height: 1.9;
+    }
+
+    .section-block { margin-bottom: 56px; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    @media (max-width: 768px) {
+      .company-table th { width: 36%; }
+      .access-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="日本総合教育舎ロゴ" onerror="this.style.display='none'">
+      <span class="nav-logo-text">日本総合教育舎<br><small style="font-weight:400;font-size:0.75em;">Japan Science Education</small></span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="メニュー">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="jr-course.html">Jr科学博士コース</a></li>
+      <li><a href="camp.html">サイエンスキャンプ</a></li>
+      <li><a href="schedule-2026.html">スケジュール</a></li>
+      <li><a href="about.html" class="active">会社概要</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ページヒーロー -->
+<div class="page-hero">
+  <h1>会社概要</h1>
+  <p>日本総合教育舎について</p>
+</div>
+
+<!-- メインコンテンツ -->
+<div class="container">
+
+  <!-- 会社概要 -->
+  <div class="section-block">
+    <div class="section-title">
+      <h2>会社概要</h2>
+      <div class="line"></div>
+    </div>
+
+    <table class="company-table">
+      <tbody>
+        <tr>
+          <th>会社名</th>
+          <td>日本総合教育舎</td>
+        </tr>
+        <tr>
+          <th>英語名</th>
+          <td>Japan Sogo Education</td>
+        </tr>
+        <tr>
+          <th>所在地</th>
+          <td>
+            〒169-0075<br>
+            東京都新宿区高田馬場<br>
+            ※詳細住所はお問い合わせください
+          </td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td>03-3200-9731</td>
+        </tr>
+        <tr>
+          <th>受付時間</th>
+          <td>平日 10:00〜18:00</td>
+        </tr>
+        <tr>
+          <th>ウェブサイト</th>
+          <td><a href="https://nasa.co.jp/" target="_blank" rel="noopener" style="color:var(--blue);">https://nasa.co.jp/</a></td>
+        </tr>
+        <tr>
+          <th>事業内容</th>
+          <td>
+            ・Jr科学博士コース（小学生・幼稚園児対象 科学教育プログラム）<br>
+            ・サイエンスキャンプ（夏合宿・自由研究サポート）<br>
+            ・科学教育全般
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 所在地・地図 -->
+  <div class="section-block">
+    <div class="section-title">
+      <h2>所在地・アクセス</h2>
+      <div class="line"></div>
+    </div>
+
+    <!-- Google マップ埋め込みエリア（後で実際の地図に差し替え可能） -->
+    <div class="map-area">
+      <div class="map-placeholder">
+        <div class="map-icon">📍</div>
+        <div>東京都新宿区高田馬場</div>
+        <div style="font-size:0.78rem; opacity:0.7;">（地図は後日設置します）</div>
+      </div>
+    </div>
+
+    <div class="access-grid">
+      <div class="access-card">
+        <h4>🚃 電車でお越しの方</h4>
+        <p>
+          JR山手線・西武新宿線・東京メトロ東西線<br>
+          「高田馬場駅」より徒歩圏内<br><br>
+          ※詳細な道順はお問い合わせください
+        </p>
+      </div>
+      <div class="access-card">
+        <h4>🚗 お車でお越しの方</h4>
+        <p>
+          近隣にコインパーキングがあります。<br>
+          公共交通機関のご利用をお勧めします。<br><br>
+          ※詳細はお問い合わせください
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 理念・想い -->
+  <div class="section-block">
+    <div class="section-title">
+      <h2>私たちの想い</h2>
+      <div class="line"></div>
+    </div>
+
+    <div style="background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px;">
+      <p style="font-size: 1rem; line-height: 2.2; color: #333; margin-bottom: 20px;">
+        日本総合教育舎は、子どもたちに「本物の科学体験」を届けることを使命として活動しています。
+      </p>
+      <p style="font-size: 0.9rem; line-height: 2.1; color: #444; margin-bottom: 16px;">
+        教科書の知識だけでなく、実際に自然に触れ、自分の手で実験し、発見し、まとめる——
+        そのプロセスを通じて、子どもたちの「なぜ？」「どうして？」という探究心を育てることが
+        私たちの教育の根幹にあります。
+      </p>
+      <p style="font-size: 0.9rem; line-height: 2.1; color: #444; margin-bottom: 16px;">
+        科学の楽しさを体で知った子どもたちが、将来社会で活躍するために必要な
+        「論理的思考力」「問題解決力」「表現力」を自然に身につけていく。
+        そのような環境を作り続けることが、私たちの目指す姿です。
+      </p>
+      <p style="font-size: 0.9rem; line-height: 2.1; color: #444;">
+        一人ひとりの子どもの個性と興味を大切にしながら、
+        「また来たい！もっと知りたい！」と感じてもらえるプログラムを
+        これからも作り続けてまいります。
+      </p>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- フッター -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-section">
+      <h4>日本総合教育舎</h4>
+      <p>
+        科学教育を通じて、子どもたちの<br>
+        探究心と思考力を育てる<br>
+        Junior Science School
+      </p>
+    </div>
+    <div class="footer-section">
+      <h4>メニュー</h4>
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="jr-course.html">Jr科学博士コース</a></li>
+        <li><a href="camp.html">サイエンスキャンプ</a></li>
+        <li><a href="schedule-2026.html">スケジュール2026</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>お問い合わせ</h4>
+      <p>
+        📞 03-3200-9731<br>
+        平日 10:00〜18:00<br><br>
+        〒169-0075<br>
+        東京都新宿区高田馬場
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 日本総合教育舎 All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+</script>
+</body>
+</html>

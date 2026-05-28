@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ｜日本総合教育舎</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* お問い合わせフォーム */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .form-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 36px 32px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.87rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 6px;
+    }
+    .form-group label .required {
+      display: inline-block;
+      background: #dc2626;
+      color: white;
+      font-size: 0.7rem;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+    .form-group label .optional {
+      display: inline-block;
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 0.7rem;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: var(--text);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      background: #fafafa;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,61,165,0.1);
+      background: white;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-submit {
+      text-align: center;
+      margin-top: 8px;
+    }
+    .form-submit .btn-primary {
+      padding: 14px 48px;
+      font-size: 1rem;
+      border-radius: 10px;
+    }
+    .form-note {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* サイドバー */
+    .contact-side {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .side-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+    .side-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--blue-light);
+    }
+    .tel-big {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--blue);
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .side-card p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .info-list {
+      list-style: none;
+    }
+    .info-list li {
+      font-size: 0.84rem;
+      color: #444;
+      line-height: 2;
+      display: flex;
+      gap: 8px;
+    }
+    .info-list li .lbl {
+      color: var(--blue-dark);
+      font-weight: 700;
+      min-width: 70px;
+    }
+
+    /* 成功・エラーメッセージ */
+    #formResult {
+      display: none;
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    #formResult.success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+    }
+    #formResult.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    /* よくある質問ミニ */
+    .quick-faq {
+      background: var(--blue-light);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 8px;
+    }
+    .quick-faq h5 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 10px;
+    }
+    .quick-faq ul {
+      list-style: none;
+      font-size: 0.8rem;
+      color: #444;
+    }
+    .quick-faq li {
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(0,61,165,0.1);
+      line-height: 1.65;
+    }
+    .quick-faq li:last-child { border-bottom: none; }
+    .quick-faq a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .quick-faq a:hover { text-decoration: underline; }
+
+    .section-block { margin-bottom: 56px; }
+    .section-block:last-child { margin-bottom: 0; }
+
+    @media (max-width: 900px) {
+      .contact-wrap { grid-template-columns: 1fr; }
+      .contact-side { flex-direction: row; flex-wrap: wrap; }
+      .side-card { flex: 1 1 240px; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-card { padding: 24px 20px; }
+      .contact-side { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="日本総合教育舎ロゴ" onerror="this.style.display='none'">
+      <span class="nav-logo-text">日本総合教育舎<br><small style="font-weight:400;font-size:0.75em;">Japan Science Education</small></span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="メニュー">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="jr-course.html">Jr科学博士コース</a></li>
+      <li><a href="camp.html">サイエンスキャンプ</a></li>
+      <li><a href="schedule-2026.html">スケジュール</a></li>
+      <li><a href="about.html">会社概要</a></li>
+      <li><a href="contact.html" class="active">お問い合わせ</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ページヒーロー -->
+<div class="page-hero">
+  <h1>お問い合わせ</h1>
+  <p>ご不明な点・体験参加のご希望など、お気軽にご連絡ください</p>
+</div>
+
+<!-- メインコンテンツ -->
+<div class="container">
+  <div class="contact-wrap">
+
+    <!-- フォーム -->
+    <div>
+      <div class="form-card">
+        <div id="formResult"></div>
+
+        <form id="contactForm" onsubmit="submitForm(event)">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>お名前 <span class="required">必須</span></label>
+              <input type="text" id="fname" placeholder="例：山田 太郎" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label>フリガナ <span class="optional">任意</span></label>
+              <input type="text" id="fkana" placeholder="例：ヤマダ タロウ">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>メールアドレス <span class="required">必須</span></label>
+            <input type="email" id="femail" placeholder="例：info@example.com" autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label>電話番号 <span class="optional">任意</span></label>
+            <input type="tel" id="ftel" placeholder="例：03-0000-0000" autocomplete="tel">
+          </div>
+
+          <div class="form-group">
+            <label>お子様の学年 <span class="optional">任意</span></label>
+            <select id="fgrade">
+              <option value="">— 選択してください —</option>
+              <option value="年少">幼稚園 年少</option>
+              <option value="年中">幼稚園 年中</option>
+              <option value="年長">幼稚園 年長</option>
+              <option value="小1">小学1年生</option>
+              <option value="小2">小学2年生</option>
+              <option value="小3">小学3年生</option>
+              <option value="小4">小学4年生</option>
+              <option value="小5">小学5年生</option>
+              <option value="小6">小学6年生</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>お問い合わせの種類 <span class="required">必須</span></label>
+            <select id="ftype">
+              <option value="">— 選択してください —</option>
+              <option value="体験参加について">体験参加について</option>
+              <option value="Jr科学博士コースについて">Jr科学博士コースについて</option>
+              <option value="サイエンスキャンプについて">サイエンスキャンプ（夏合宿）について</option>
+              <option value="自由研究サポートについて">自由研究サポートについて</option>
+              <option value="費用・入会について">費用・入会について</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>お問い合わせ内容 <span class="required">必須</span></label>
+            <textarea id="fmessage" placeholder="ご質問・ご要望をご記入ください"></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary">送信する →</button>
+            <p class="form-note">
+              ※ 送信後、確認メールをお送りします。<br>
+              ※ 通常2〜3営業日以内にご返信します。
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <!-- よくある質問へのリンク -->
+      <div class="quick-faq" style="margin-top: 20px;">
+        <h5>よくあるご質問</h5>
+        <ul>
+          <li>📅 <a href="schedule-2026.html">2026年 スケジュール一覧はこちら</a></li>
+          <li>🔬 <a href="jr-course.html">Jr科学博士コースの詳細はこちら</a></li>
+          <li>🏕️ <a href="camp.html">サイエンスキャンプ（夏合宿）の詳細はこちら</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- サイドバー -->
+    <div class="contact-side">
+      <div class="side-card">
+        <h4>📞 お電話でのお問い合わせ</h4>
+        <div class="tel-big">03-3200-9731</div>
+        <p>平日 10:00〜18:00<br>（土日・祝日はお休みです）</p>
+      </div>
+
+      <div class="side-card">
+        <h4>🏢 所在地</h4>
+        <ul class="info-list">
+          <li><span class="lbl">住所</span>東京都新宿区高田馬場</li>
+          <li><span class="lbl">〒</span>169-0075</li>
+          <li><span class="lbl">最寄駅</span>高田馬場駅</li>
+        </ul>
+        <p style="margin-top:10px;">
+          <a href="about.html" style="color:var(--blue); font-size:0.82rem;">地図・アクセス詳細はこちら →</a>
+        </p>
+      </div>
+
+      <div class="side-card">
+        <h4>📨 返信について</h4>
+        <p>
+          フォーム送信後、確認メールをお送りします。<br>
+          通常<strong>2〜3営業日以内</strong>にご返信いたします。<br><br>
+          お急ぎの場合はお電話でお問い合わせください。
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /container -->
+
+<!-- フッター -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-section">
+      <h4>日本総合教育舎</h4>
+      <p>
+        科学教育を通じて、子どもたちの<br>
+        探究心と思考力を育てる<br>
+        Junior Science School
+      </p>
+    </div>
+    <div class="footer-section">
+      <h4>メニュー</h4>
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="jr-course.html">Jr科学博士コース</a></li>
+        <li><a href="camp.html">サイエンスキャンプ</a></li>
+        <li><a href="schedule-2026.html">スケジュール2026</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>お問い合わせ</h4>
+      <p>
+        📞 03-3200-9731<br>
+        平日 10:00〜18:00<br><br>
+        〒169-0075<br>
+        東京都新宿区高田馬場
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 日本総合教育舎 All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+function submitForm(e) {
+  e.preventDefault();
+
+  const name    = document.getElementById('fname').value.trim();
+  const email   = document.getElementById('femail').value.trim();
+  const type    = document.getElementById('ftype').value;
+  const message = document.getElementById('fmessage').value.trim();
+  const result  = document.getElementById('formResult');
+
+  // バリデーション
+  if (!name) {
+    showResult('error', 'お名前をご入力ください。');
+    document.getElementById('fname').focus();
+    return;
+  }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showResult('error', '正しいメールアドレスをご入力ください。');
+    document.getElementById('femail').focus();
+    return;
+  }
+  if (!type) {
+    showResult('error', 'お問い合わせの種類をご選択ください。');
+    document.getElementById('ftype').focus();
+    return;
+  }
+  if (!message) {
+    showResult('error', 'お問い合わせ内容をご入力ください。');
+    document.getElementById('fmessage').focus();
+    return;
+  }
+
+  // 送信処理（実際のサーバー送信はここに実装）
+  // 現在はデモとして成功表示
+  showResult('success',
+    `✅ お問い合わせを受け付けました。\n${name} 様、ご連絡ありがとうございます。\n2〜3営業日以内に ${email} 宛にご返信いたします。`
+  );
+  document.getElementById('contactForm').reset();
+  window.scrollTo({ top: document.getElementById('formResult').offsetTop - 80, behavior: 'smooth' });
+}
+
+function showResult(type, msg) {
+  const el = document.getElementById('formResult');
+  el.className = type;
+  el.style.display = 'block';
+  el.style.whiteSpace = 'pre-line';
+  el.textContent = msg;
+}
+</script>
+</body>
+</html>

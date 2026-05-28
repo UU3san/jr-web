@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一太郎→Web 変換ツール｜日本総合教育舎</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #f0f4fa; }
+
+    .tool-header {
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+      color: white;
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    .tool-header h1 { font-size: 1.5rem; font-weight: 900; }
+    .tool-header p  { margin-top: 8px; opacity: 0.85; font-size: 0.9rem; }
+
+    .tool-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      background: var(--blue);
+      color: white;
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-body { padding: 20px; }
+
+    /* ── ドロップゾーン ── */
+    .drop-zone {
+      border: 2px dashed #93c5fd;
+      border-radius: 10px;
+      padding: 36px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--blue-light);
+      margin-bottom: 16px;
+    }
+
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      border-color: var(--blue);
+      background: #dbeafe;
+    }
+
+    .drop-icon { font-size: 2.5rem; margin-bottom: 8px; }
+    .drop-text { font-size: 0.9rem; color: var(--muted); }
+    .drop-text strong { color: var(--blue); }
+
+    #fileInput { display: none; }
+
+    /* ── 貼り付けエリア ── */
+    .paste-label {
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    #htmlInput {
+      width: 100%;
+      height: 200px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    #htmlInput:focus { border-color: var(--blue); }
+
+    /* ── 設定 ── */
+    .settings-row {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .setting-item label {
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .setting-item select,
+    .setting-item input[type="text"] {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.87rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .setting-item select:focus,
+    .setting-item input:focus { border-color: var(--blue); }
+
+    .convert-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .convert-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .convert-btn:active { transform: translateY(0); }
+
+    /* ── 出力パネル ── */
+    .output-panel { grid-column: 1 / -1; }
+
+    .output-actions {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 9px 20px;
+      border-radius: 7px;
+      font-size: 0.87rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .action-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .action-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-dl   { background: var(--blue); color: white; }
+    .btn-copy { background: #059669; color: white; }
+    .btn-open { background: #7c3aed; color: white; }
+    .btn-clear{ background: #e5e7eb; color: var(--text); }
+
+    /* プレビュー枠 */
+    #previewFrame {
+      width: 100%;
+      height: 600px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+    }
+
+    /* ステータスバー */
+    #statusBar {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+      display: none;
+    }
+    #statusBar.success { background: #dcfce7; color: #166534; display: block; }
+    #statusBar.error   { background: #fee2e2; color: #991b1b; display: block; }
+    #statusBar.info    { background: var(--blue-light); color: var(--blue-dark); display: block; }
+
+    /* 使い方 */
+    .how-to {
+      max-width: 1100px;
+      margin: 0 auto 40px;
+      padding: 0 20px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      background: white;
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--blue);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    .step h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 6px; color: var(--blue-dark); }
+    .step p  { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .tool-container { grid-template-columns: 1fr; }
+      .output-panel   { grid-column: 1; }
+      .steps          { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="日本総合教育舎" onerror="this.style.display='none'">
+      <span class="nav-logo-text">日本総合教育舎</span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="メニュー">☰</button>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="jr-course.html">Jr科学博士コース</a></li>
+        <li><a href="schedule-2026.html">スケジュール</a></li>
+        <li><a href="camp.html">サイエンスキャンプ</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+        <li><a href="converter.html" class="active">変換ツール</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ── TOOL HEADER ── -->
+<div class="tool-header">
+  <h1>⚙️ 一太郎 → Web 変換ツール</h1>
+  <p>一太郎で作った書類（.htm）をサイトのデザインに合わせたWebページに変換します</p>
+</div>
+
+<!-- ── 使い方 ── -->
+<div class="how-to" style="padding-top:28px;">
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>ファイルをドロップ</h4>
+      <p>一太郎からHTMLで書き出した .htm ファイルをドラッグ＆ドロップ</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>ページ設定</h4>
+      <p>ページの種類・タイトル・ナビの現在ページを選択</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>変換ボタンを押す</h4>
+      <p>「変換する」ボタンでサイトデザインに変換。プレビューで確認</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>HTMLをダウンロード</h4>
+      <p>できあがったHTMLをダウンロードしてGitHubにアップ</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN TOOL ── -->
+<div class="tool-container">
+
+  <!-- 左：入力 -->
+  <div class="panel">
+    <div class="panel-header">📂 ① ファイル・テキストの入力</div>
+    <div class="panel-body">
+
+      <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        <div class="drop-icon">📄</div>
+        <div class="drop-text">
+          <strong>ここにHTMファイルをドロップ</strong><br>
+          または クリックしてファイルを選択<br>
+          <small style="color:#9ca3af;">（一太郎から書き出した .htm ファイル）</small>
+        </div>
+      </div>
+      <input type="file" id="fileInput" accept=".htm,.html">
+
+      <span class="paste-label">または HTMLソースを直接貼り付け：</span>
+      <textarea id="htmlInput" placeholder="一太郎のHTMLソースをここに貼り付けてください..."></textarea>
+
+    </div>
+  </div>
+
+  <!-- 右：設定 -->
+  <div class="panel">
+    <div class="panel-header">⚙️ ② ページ設定</div>
+    <div class="panel-body">
+      <div class="settings-row">
+
+        <div class="setting-item">
+          <label>ページタイトル</label>
+          <input type="text" id="pageTitle" value="ページタイトル｜日本総合教育舎" placeholder="例：2026年スケジュール｜日本総合教育舎">
+        </div>
+
+        <div class="setting-item">
+          <label>ページの種類</label>
+          <select id="pageType">
+            <option value="general">一般ページ（そのまま変換）</option>
+            <option value="schedule">スケジュールページ</option>
+            <option value="article">お知らせ・記事</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <label>ナビゲーション（現在のページ）</label>
+          <select id="activeNav">
+            <option value="index.html">HOME</option>
+            <option value="jr-course.html">Jr科学博士コース</option>
+            <option value="schedule-2026.html">スケジュール</option>
+            <option value="camp.html">サイエンスキャンプ</option>
+            <option value="about.html">会社概要</option>
+            <option value="contact.html">お問い合わせ</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <label>出力ファイル名</label>
+          <input type="text" id="outputFilename" value="page.html" placeholder="例：schedule-2027.html">
+        </div>
+
+      </div>
+
+      <button class="convert-btn" onclick="convertHTML()">🔄 変換する</button>
+
+    </div>
+  </div>
+
+  <!-- 下：出力 -->
+  <div class="panel output-panel">
+    <div class="panel-header">👁️ ③ プレビュー・ダウンロード</div>
+    <div class="panel-body">
+
+      <div id="statusBar"></div>
+
+      <div class="output-actions">
+        <button class="action-btn btn-dl"   id="dlBtn"    onclick="downloadHTML()" disabled>⬇ HTMLをダウンロード</button>
+        <button class="action-btn btn-copy" id="copyBtn"  onclick="copyHTML()"    disabled>📋 HTMLをコピー</button>
+        <button class="action-btn btn-open" id="openBtn"  onclick="openPreview()" disabled>🔍 別タブで開く</button>
+        <button class="action-btn btn-clear"              onclick="clearAll()">✕ クリア</button>
+      </div>
+
+      <iframe id="previewFrame" title="プレビュー" sandbox="allow-same-origin allow-scripts"></iframe>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-section">
+      <h4>日本総合教育舎</h4>
+      <p>〒169-0075<br>東京都新宿区高田馬場2-14-5</p>
+    </div>
+    <div class="footer-section">
+      <h4>メニュー</h4>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="schedule-2026.html">スケジュール</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>お問い合わせ</h4>
+      <p>TEL：03-3200-9731<br>受付：平日 10:00〜18:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 株式会社日本総合教育舎. All rights reserved.</div>
+</footer>
+
+<script>
+/* ============================================================
+   一太郎 → Web 変換ツール
+============================================================ */
+
+let convertedHTML = '';
+
+// ── ドラッグ＆ドロップ ──────────────────────────────
+const dropZone = document.getElementById('dropZone');
+
+dropZone.addEventListener('dragover', e => {
+  e.preventDefault();
+  dropZone.classList.add('dragover');
+});
+
+dropZone.addEventListener('dragleave', () => {
+  dropZone.classList.remove('dragover');
+});
+
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) readFile(file);
+});
+
+document.getElementById('fileInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) readFile(file);
+});
+
+function readFile(file) {
+  showStatus('info', `📄 ファイル読み込み中: ${file.name}`);
+  document.getElementById('outputFilename', ).value =
+    file.name.replace(/\.(htm|html)$/i, '') + '_web.html';
+
+  // Shift_JIS で読み込み
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('htmlInput').value = e.target.result;
+    showStatus('success', `✅ 読み込み完了: ${file.name}（${Math.round(file.size/1024)}KB）`);
+  };
+  reader.onerror = () => {
+    showStatus('error', '❌ ファイルの読み込みに失敗しました。');
+  };
+  reader.readAsText(file, 'Shift_JIS');
+}
+
+// ── 変換処理 ─────────────────────────────────────────
+function convertHTML() {
+  const raw = document.getElementById('htmlInput').value.trim();
+  if (!raw) {
+    showStatus('error', '❌ HTMLソースを入力またはファイルを選択してください。');
+    return;
+  }
+
+  try {
+    const title    = document.getElementById('pageTitle').value || 'ページ｜日本総合教育舎';
+    const pageType = document.getElementById('pageType').value;
+    const activeNav= document.getElementById('activeNav').value;
+
+    // 一太郎HTMLをパース
+    const parser = new DOMParser();
+    const doc    = parser.parseFromString(raw, 'text/html');
+
+    // bodyの中身を抽出してクリーニング
+    let bodyContent = cleanIchitaro(doc.body, pageType);
+
+    // 完成ページを組み立て
+    convertedHTML = buildPage(title, activeNav, bodyContent, pageType);
+
+    // プレビュー表示
+    const frame = document.getElementById('previewFrame');
+    frame.srcdoc = convertedHTML;
+
+    // ボタンを有効化
+    ['dlBtn','copyBtn','openBtn'].forEach(id => {
+      document.getElementById(id).disabled = false;
+    });
+
+    showStatus('success', '✅ 変換完了！プレビューを確認してください。');
+
+  } catch(e) {
+    showStatus('error', '❌ 変換中にエラーが発生しました: ' + e.message);
+    console.error(e);
+  }
+}
+
+// ── 一太郎HTMLのクリーニング ──────────────────────────
+function cleanIchitaro(body, pageType) {
+  if (!body) return '<p>（コンテンツを抽出できませんでした）</p>';
+
+  // クローンして編集
+  const clone = body.cloneNode(true);
+
+  // FONT タグをspan→テキストに変換
+  clone.querySelectorAll('font').forEach(font => {
+    const span = document.createElement('span');
+    span.innerHTML = font.innerHTML;
+    font.parentNode.replaceChild(span, font);
+  });
+
+  // style属性・face属性・width属性を除去（テーブルのwidthは残す）
+  clone.querySelectorAll('[style]').forEach(el => el.removeAttribute('style'));
+  clone.querySelectorAll('[face]').forEach(el => el.removeAttribute('face'));
+
+  // META / HEAD 内の要素を削除（body以外が含まれた場合）
+  clone.querySelectorAll('meta,link,script,style').forEach(el => el.remove());
+
+  // 連続するBRタグを1つに圧縮
+  let html = clone.innerHTML;
+  html = html.replace(/(<br\s*\/?>\s*){3,}/gi, '<br><br>');
+  html = html.replace(/^\s*(<br\s*\/?>\s*)+/gi, '');
+
+  // 全角スペースのみの要素は除去
+  html = html.replace(/<(p|div|td|th)[^>]*>\s*(&nbsp;|　|\s)*\s*<\/\1>/gi, '');
+
+  // テーブルにクラスを付与（スケジュールページ用）
+  if (pageType === 'schedule') {
+    html = html.replace(/<table/gi, '<table class="data-table"');
+  } else {
+    html = html.replace(/<table/gi, '<table class="data-table"');
+  }
+
+  return html;
+}
+
+// ── ページテンプレートを組み立て ────────────────────────
+function buildPage(title, activeNav, content, pageType) {
+  const navItems = [
+    { href: 'index.html',         label: 'HOME' },
+    { href: 'jr-course.html',     label: 'Jr科学博士コース' },
+    { href: 'schedule-2026.html', label: 'スケジュール' },
+    { href: 'camp.html',          label: 'サイエンスキャンプ' },
+    { href: 'about.html',         label: '会社概要' },
+    { href: 'contact.html',       label: 'お問い合わせ' },
+  ];
+
+  const navHTML = navItems.map(item =>
+    `<li><a href="${item.href}"${item.href === activeNav ? ' class="active"' : ''}>${item.label}</a></li>`
+  ).join('\n        ');
+
+  // ページタイトル（|の前の部分）
+  const pageHeading = title.split('｜')[0].trim();
+
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHTML(title)}</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .data-table { width:100%; border-collapse:collapse; background:white; font-size:0.88rem; }
+    .data-table th { background:var(--blue); color:white; padding:10px 12px; font-weight:500; text-align:left; }
+    .data-table td { padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+    .data-table tr:last-child td { border-bottom:none; }
+    .data-table tr:hover td { background:var(--blue-light); }
+    .content-wrap { background:white; border-radius:10px; box-shadow:0 2px 12px rgba(0,0,0,.08); padding:28px 32px; }
+    h2,h3,h5 { color:var(--blue-dark); margin:20px 0 10px; }
+    h5 { font-size:1rem; border-left:3px solid var(--blue); padding-left:10px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="日本総合教育舎" onerror="this.style.display='none'">
+      <span class="nav-logo-text">日本総合教育舎</span>
+    </a>
+    <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="メニュー">☰</button>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        ${navHTML}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>${escapeHTML(pageHeading)}</h1>
+</div>
+
+<div class="container">
+  <div class="content-wrap">
+    ${content}
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-section">
+      <h4>日本総合教育舎</h4>
+      <p>〒169-0075 東京都新宿区高田馬場2-14-5<br>ホンダビル1F</p>
+    </div>
+    <div class="footer-section">
+      <h4>メニュー</h4>
+      <ul>
+        <li><a href="jr-course.html">Jr科学博士コース</a></li>
+        <li><a href="schedule-2026.html">スケジュール</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>お問い合わせ</h4>
+      <p>TEL：03-3200-9731<br>受付：平日 10:00〜18:00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 株式会社日本総合教育舎. All rights reserved.</div>
+</footer>
+
+</body>
+</html>`;
+}
+
+// ── ダウンロード ──────────────────────────────────────
+function downloadHTML() {
+  if (!convertedHTML) return;
+  const filename = document.getElementById('outputFilename').value || 'page.html';
+  const blob = new Blob([convertedHTML], { type: 'text/html;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showStatus('success', `⬇ ${filename} をダウンロードしました`);
+}
+
+// ── コピー ────────────────────────────────────────────
+function copyHTML() {
+  if (!convertedHTML) return;
+  navigator.clipboard.writeText(convertedHTML).then(() => {
+    showStatus('success', '📋 HTMLをクリップボードにコピーしました');
+  }).catch(() => {
+    showStatus('error', '❌ コピーに失敗しました。ブラウザの設定をご確認ください。');
+  });
+}
+
+// ── 別タブで開く ──────────────────────────────────────
+function openPreview() {
+  if (!convertedHTML) return;
+  const blob = new Blob([convertedHTML], { type: 'text/html;charset=utf-8' });
+  window.open(URL.createObjectURL(blob), '_blank');
+}
+
+// ── クリア ────────────────────────────────────────────
+function clearAll() {
+  document.getElementById('htmlInput').value = '';
+  document.getElementById('fileInput').value = '';
+  document.getElementById('previewFrame').srcdoc = '';
+  convertedHTML = '';
+  ['dlBtn','copyBtn','openBtn'].forEach(id => {
+    document.getElementById(id).disabled = true;
+  });
+  document.getElementById('statusBar').style.display = 'none';
+}
+
+// ── ステータス表示 ────────────────────────────────────
+function showStatus(type, msg) {
+  const bar = document.getElementById('statusBar');
+  bar.className = type;
+  bar.textContent = msg;
+}
+
+// ── HTML エスケープ ───────────────────────────────────
+function escapeHTML(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── ナビ ──────────────────────────────────────────────
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+</script>
+</body>
+</html>

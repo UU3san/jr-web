@@ -3,448 +3,452 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ジュニア科学博士コース・スケジュール 2026年 6月〜10月</title>
+  <title>日本総合教育舎｜サイエンス体験学習</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      font-family: 'Meiryo', 'メイリオ', 'MS PGothic', sans-serif;
-      font-size: 14px;
-      color: #333333;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 20px;
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 55%, var(--blue-mid) 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    h2 { font-size: 1.5em; margin: 20px 0 10px; }
-    h3 { font-size: 1.2em; margin: 25px 0 8px; }
-    h5 { font-size: 1.0em; margin: 20px 0 5px; }
-    table {
-      border-collapse: collapse;
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      padding: 4px 18px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: 0.04em;
+    }
+
+    .hero h1 em {
+      color: #FFD700;
+      font-style: normal;
+    }
+
+    .hero-sub {
+      margin-top: 16px;
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      opacity: 0.88;
+      line-height: 1.8;
+    }
+
+    .hero-btns {
+      margin-top: 32px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── COURSES ── */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+    }
+
+    .course-img {
       width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+
+    .course-body { padding: 22px; flex: 1; }
+
+    .course-tag {
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue);
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
       margin-bottom: 10px;
     }
-    th, td {
-      border: 1px solid #cccccc;
-      padding: 5px 8px;
-      vertical-align: top;
-      font-size: 14px;
+
+    .course-body h3 {
+      font-size: 1.15rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: var(--blue-dark);
     }
-    th {
-      background-color: #f0f0f0;
-      font-weight: normal;
+
+    .course-body p { font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
+
+    .course-foot {
+      padding: 14px 22px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ── FEATURES ── */
+    .features-bg { background: var(--blue-light); padding: 60px 20px; }
+
+    .features-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .feature-item {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px 18px;
       text-align: center;
+      box-shadow: var(--shadow);
     }
-    p { margin: 8px 0; }
+
+    .feature-icon {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+
+    .feature-item h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 8px;
+    }
+
+    .feature-item p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── NEWS ── */
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+
+    .news-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .news-item:last-child { border-bottom: none; }
+    .news-item:hover .news-title { color: var(--blue); text-decoration: underline; }
+
+    .news-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+      min-width: 90px;
+    }
+
+    .news-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: var(--blue-light);
+      color: var(--blue);
+      border-radius: 4px;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+
+    .news-title { font-size: 0.9rem; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .cta-section h2 { font-size: 1.6rem; font-weight: 900; }
+    .cta-section p  { margin-top: 10px; opacity: 0.85; font-size: 0.95rem; }
+
+    .cta-btns {
+      margin-top: 28px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-phone {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: #FFD700;
+      margin-top: 20px;
+    }
+
+    .cta-phone span { font-size: 0.85rem; font-weight: 400; opacity: 0.8; color: white; }
+
+    @media (max-width: 768px) {
+      .courses-grid     { grid-template-columns: 1fr; }
+      .features-grid    { grid-template-columns: 1fr 1fr; }
+      .hero { padding: 60px 20px; min-height: 320px; }
+    }
+
+    @media (max-width: 480px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
-<h2>Jr科学博士コース・スケジュール 2026年 ６月〜10月</h2>
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="日本総合教育舎" onerror="this.style.display='none'">
+      <span class="nav-logo-text">日本総合教育舎</span>
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="メニュー">☰</button>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">HOME</a></li>
+        <li><a href="jr-course.html">Jr科学博士コース</a></li>
+        <li><a href="schedule-2026.html">スケジュール</a></li>
+        <li><a href="camp.html">サイエンスキャンプ</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-<span style="color: #ff0000;">※(小)は小学生のみ、(幼)は幼児のみのクラスです。(小)(幼)のないコースは小学・幼児共通の内容、参加できます。</span>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">小学生・幼児対象のサイエンス体験学習</div>
+    <h1>
+      <em>科学する心</em>を育てる<br>
+      日本唯一の体験教育機関
+    </h1>
+    <p class="hero-sub">
+      野外研修・室内研修を通じて、子どもたちの<br>
+      創造力・探求心・生きる力を育みます
+    </p>
+    <div class="hero-btns">
+      <a href="schedule-2026.html" class="btn btn-white">2026年スケジュールを見る</a>
+      <a href="contact.html" class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.6);">お問い合わせ</a>
+    </div>
+  </div>
+</section>
 
-<h5>6月</h5>
-<table>
-  <tbody>
-    <tr>
-      <th width="5%">日</th>
-      <th width="5%">曜日</th>
-      <th width="25%">テーマ</th>
-      <th width="50%">内容</th>
-      <th width="15%">備考</th>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>土</td>
-      <td>【ジャガイモの秘密】<br>ポテトチップを作ろう</td>
-      <td>掘ったジャガイモで大好きなポテトチップを作ります。ジャガイモはトマトやナスと同じ仲間です。ジャガイモの秘密を学びます。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>日</td>
-      <td>【養蚕農家を訪ねて】<br>カイコの飼育と糸くり</td>
-      <td>養蚕農家では50,000頭もカイコを飼育しています。カイコに餌をあげ養蚕農家の一日を体験します。繭玉からスピンドルで糸くりにも挑戦します。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>土</td>
-      <td>【空気の科学】<br>ホバークラフト作り</td>
-      <td>ホバークラフトには車輪がありません。空気の力で浮上して走る便利な乗り物です。どのような仕組みか、ホバークラフトを作り、走らせてみよう。</td>
-      <td>室内研修 AM10:00～PM3:00</td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td>日</td>
-      <td>【タイドプールの水族館】<br>ヤドカリの宿かえ</td>
-      <td>ヤドカリは大きくなるにつれ、宿である貝殻を替えていきます。宿かえの様子を実験、観察します。自宅でも飼育できるオカヤドカリを育ててみよう。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>20</td>
-      <td>土</td>
-      <td>【釣りを科学する】<br>マス釣りに挑戦</td>
-      <td>ニジマスは食いつきがよく、引きも良いため、「釣ってたのし・食べておいし」魚です。マス釣り池で釣りの醍醐味と釣ったマスの塩焼きを体験します。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>21<br>(小)</td>
-      <td>日</td>
-      <td>【ロボットの科学】<br>ＳＦロボを作ろう</td>
-      <td>宇宙からやってきたＳＦロボは二本足です。変速ギヤーとクランクの動きによってユニークにトコトコ歩きます。二足歩行の仕組みを学びます。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>21<br>(幼)</td>
-      <td>日</td>
-      <td>【走る仕組みを科学する】<br>スーパーバイク作り</td>
-      <td>スーパーバイクは後輪をプーリーで回して走ります。ワイドタイヤを装備し、どこでもスイスイ走ります。電池とモーターで走る仕組みを学びます。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>27</td>
-      <td>土</td>
-      <td>【カンテラを作って】<br>鍾乳洞探検隊</td>
-      <td>空缶を利用して、オランダから渡来した、昔の懐中電灯カンテラを作ります。カンテラの光をたよりに鍾乳洞を探検します。なにか不思議なものを発見！</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>28</td>
-      <td>日</td>
-      <td>【植物の秘密】<br>トウモロコシ狩り</td>
-      <td>トウモロコシはイネ科の植物です。ひげは何のためにあるの？トウモロコシ狩りをして秘密を調べます。おいしいポップコーンも作ります。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-  </tbody>
-</table>
+<!-- ── COURSES ── -->
+<div class="container">
+  <div class="section-title">
+    <h2>コースのご紹介</h2>
+    <p>季節ごとに変わる多彩なプログラム</p>
+    <div class="line"></div>
+  </div>
 
-<h5>7月</h5>
-<table>
-  <tbody>
-    <tr>
-      <th width="5%">日</th>
-      <th width="5%">曜日</th>
-      <th width="25%">テーマ</th>
-      <th width="50%">内容</th>
-      <th width="15%">備考</th>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>土</td>
-      <td>【光ファイバーの星座】<br>七夕のプラネタリウム作り</td>
-      <td>琴座の織り姫(ベガ)、鷲座の彦星(アルタイル)が瞬いています。白鳥座のデネブを加えて夏の大三角です。光ファイバーで七夕のプラネタリウムを作ります。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>日</td>
-      <td>【ブルーベリーの秘密】<br>ブルーベリー摘み</td>
-      <td>農園でブルーベリー摘みに挑戦します。摘み取ったブルーベリーで色が変わる化学実験します。実験の後はおいしい「ブルーベリーシェイク」で乾杯！</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>土</td>
-      <td>【渓谷の生物】<br>沢ガニを探そう</td>
-      <td>沢ガニは水のきれいな渓谷にしか生息しないカニです。昼間は石の下などに隠れています。沢ガニがたくさんいる秘密の渓谷へ行ってみよう。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>日</td>
-      <td>【ドライアイスの化学】<br>マイナス７７℃の世界</td>
-      <td>冷たいドライアイスでふかふかのカップケーキやレモンソーダのおやつを作ります。マイナス７７度を実感、バナナで釘も打ってみよう！</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>18<br>(小)</td>
-      <td>土</td>
-      <td>【気体の膨張】<br>ポンポン蒸気船作り</td>
-      <td>銅のパイプを使ってボイラーを作ります。ろうそくの燃料でポンポンと軽快に走ります。走るメカニズムについて学びます。昔懐かしい物理のおもちゃです。</td>
-      <td>室内研修 AM10:00～PM3:00</td>
-    </tr>
-    <tr>
-      <td>18<br>(幼)</td>
-      <td>土</td>
-      <td>【走る不思議を科学する】<br>マークトウェイン号作り</td>
-      <td>トムソーヤの冒険や、アメリカのミシシッピー川を今も航行している外輪船を作ります。ディズニーランドのアトラクションでも乗船したことがありますか？</td>
-      <td>室内研修 AM10:00～PM3:00</td>
-    </tr>
-    <tr>
-      <td>19</td>
-      <td>日</td>
-      <td>【氷と塩の科学】<br>アイスクリーム作り</td>
-      <td>水は0℃で氷になります。氷に塩を混ぜると何度になるかな？氷と塩の不思議な力を利用しておいしいアイスクリームを作ります。</td>
-      <td>室内研修 AM10:00～PM3:00</td>
-    </tr>
-    <tr>
-      <td>20<br>(小)</td>
-      <td>月</td>
-      <td>【花火を化学する】<br>線香花火を作ろう</td>
-      <td>夏の風物詩『線香花火』を作ります。花火のキラキラは鉄が燃えているのです。鉄が燃える！花火のきれいな色は！燃焼と炎色反応の化学を学びます。</td>
-      <td>室内研修 AM10:00～PM3:00</td>
-    </tr>
-    <tr>
-      <td>20<br>(幼)</td>
-      <td>月</td>
-      <td>【鏡の不思議】<br>不思議な万華鏡を作ろう</td>
-      <td>鏡が3枚、4枚の変わった万華鏡を作ります。万華鏡は光の屈折と鏡の反射による芸術です。特殊な液体で幾何学模様が見える不思議な世界をのぞきます。</td>
-      <td>室内研修 AM10:00～PM3:00</td>
-    </tr>
-  </tbody>
-</table>
+  <div class="courses-grid">
+    <div class="course-card">
+      <div class="course-img">🔬</div>
+      <div class="course-body">
+        <span class="course-tag">小学生・幼児対象</span>
+        <h3>Jr科学博士コース</h3>
+        <p>
+          「作る」「実験する」「創造する」などの科学する心をベースに編成されたカリキュラム。
+          年間スケジュールより興味のある研修を選んで参加できます。
+          土・日・祝日の1日研修です。
+        </p>
+      </div>
+      <div class="course-foot">
+        <a href="jr-course.html" class="btn btn-primary" style="font-size:0.85rem;padding:8px 20px;">詳しく見る →</a>
+      </div>
+    </div>
 
-<h3>2026 夏合宿</h3>
-<table>
-  <tbody>
-    <tr>
-      <th width="5%">コース</th>
-      <th width="12%">日程</th>
-      <th width="23%">テーマ</th>
-      <th width="45%">内容</th>
-      <th width="15%">場所</th>
-    </tr>
-    <tr>
-      <td style="text-align:center;">A</td>
-      <td>7月27日(日)<br>〜7月29日(火)</td>
-      <td>里山とサイエンス・ラボ</td>
-      <td>甘楽は養蚕の歴史がある田舎町です。古都、甘楽でサイエンス。3Dカメラで撮影し立体的に見えるステレオビューアを作ります。繭玉人形や郷土料理も作り田舎の生活を体験します。里山、甘楽はカブトムシの楽園です。秘密の薬とトラップを作りカブトムシ取りに挑戦します。</td>
-      <td>群馬県 甘楽</td>
-    </tr>
-    <tr>
-      <td style="text-align:center;">B</td>
-      <td>8月2日(日)<br>〜8月4日(火)</td>
-      <td>八ヶ岳高原でソーラーカー</td>
-      <td>八ヶ岳高原の太陽を浴び、ソーラーパネルで発電するソーラーカーを作ります。ソーラーで発電した電力はコンデンサーで蓄電、室内や曇りの日などでも走行できるハイブリッドカーです。アメリカでもっともたくさん作られ、20世紀前半の社会に大きな足跡を残した『T型フォード』をモデルに作ります。</td>
-      <td>長野県 八ヶ岳</td>
-    </tr>
-    <tr>
-      <td style="text-align:center;">C<br>(小)</td>
-      <td>8月2日(日)<br>〜8月4日(火)</td>
-      <td>天体望遠鏡で惑星観測</td>
-      <td>標高1300mの八ヶ岳高原で、ケプラー式屈折式天体望遠鏡を作り、天体観測します。口径60mm、焦点距離700mm、倍率56倍の屈折式天体望遠鏡を作ります。土星の輪も観測できる本格的な望遠鏡で、天体観測のベースになる望遠鏡です。</td>
-      <td>長野県 八ヶ岳</td>
-    </tr>
-    <tr>
-      <td style="text-align:center;">D</td>
-      <td>8月6日(木)<br>〜8月8日(土)</td>
-      <td>サイエンス・キャンプ</td>
-      <td>標高1300m都会の夏を忘れさせる菅平高原で、テントを設営し、寝袋に潜ってキャンプ生活を体験します。みんなで仕事を分担、薪割り、火起こし、飯ごう炊飯などおいしい食事を作ります。アメリカ西部の伝統的なキャンプS'moreパーティーや色変わりするキャンプファイヤーなどキャンプ生活を堪能します。</td>
-      <td>長野県 菅平高原</td>
-    </tr>
-  </tbody>
-</table>
+    <div class="course-card">
+      <div class="course-img" style="background:linear-gradient(135deg,#1a5276,#2980b9);">🏕️</div>
+      <div class="course-body">
+        <span class="course-tag">夏季開催</span>
+        <h3>サイエンスキャンプ</h3>
+        <p>
+          標高1300mの高原でテント生活を体験しながら、
+          本格的なサイエンス実験に挑戦。
+          自然の中でしか学べない、かけがえない体験を。
+        </p>
+      </div>
+      <div class="course-foot">
+        <a href="camp.html" class="btn btn-primary" style="font-size:0.85rem;padding:8px 20px;">詳しく見る →</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h3>2026 サイエンスの自由研究</h3>
-<h5>8月</h5>
-<table>
-  <tbody>
-    <tr>
-      <th width="5%">日</th>
-      <th width="5%">曜日</th>
-      <th width="25%">テーマ</th>
-      <th width="50%">内容</th>
-      <th width="15%">備考</th>
-    </tr>
-    <tr>
-      <td>21<br>(小)</td>
-      <td>金</td>
-      <td>【東京を科学する】<br>東京の立体地図作り</td>
-      <td>東京都は東西に細長い形をしています。西は2017mの雲取山から、東は0mの東京湾岸まで起伏に富んだ地形です。立体地図を作るとよく理解できます。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>22<br>(小)</td>
-      <td>土</td>
-      <td>【太陽系の惑星】<br>10億分の１の天体模型作り</td>
-      <td>太陽系には8つの惑星が太陽の周りを回っています。1番大きな惑星木星は地球の約11倍もあります。10億分の1の太陽系惑星模型を作り、実感します。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>23<br>(小)</td>
-      <td>日</td>
-      <td>【音の不思議】<br>トランジスタラジオ作り</td>
-      <td>アンテナから、トランジスタ、バリコンなどの部品を組み立て本格的なラジオを作ります。自作のラジオから声や音楽が聞こえたら…大感激ですね。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-  </tbody>
-</table>
+<!-- ── FEATURES ── -->
+<div class="features-bg">
+  <div class="section-title">
+    <h2>体験教育の特徴</h2>
+    <p>教科書の外に、真の教科書がある</p>
+    <div class="line"></div>
+  </div>
 
-<h5>9月</h5>
-<table>
-  <tbody>
-    <tr>
-      <th width="5%">日</th>
-      <th width="5%">曜日</th>
-      <th width="25%">テーマ</th>
-      <th width="50%">内容</th>
-      <th width="15%">備考</th>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>日</td>
-      <td>【ウミガメの不思議－①】<br>ウミガメを海に帰そう</td>
-      <td>6月〜8月の静岡県中田島砂丘はウミガメが産卵に来る海岸です。9月になると卵から一斉にふ化します。よちよち歩きのウミガメを海に帰してあげましょう。</td>
-      <td>特別研修<br>※別紙参照</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>土</td>
-      <td>【フルーツの科学】<br>梨狩りと梨コンポーネント</td>
-      <td>梨は一番古くから栽培されている果実です。弥生時代の登呂遺跡からも「梨の種」が出土しています。梨狩りをして収穫した梨で梨コンポーネントを作ります。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>日</td>
-      <td>【ウミガメの不思議－②】<br>ウミガメを海に帰そう</td>
-      <td>放流したウミガメは黒潮に乗ってメキシコ沖まで行き、また赤道付近を横断し約20年後にこの砂丘に戻ってきます。ウミガメの不思議を体験します。</td>
-      <td>特別研修<br>※別紙参照</td>
-    </tr>
-    <tr>
-      <td>20</td>
-      <td>日</td>
-      <td>【栗拾いに挑戦】<br>栗拾いと栗ご飯</td>
-      <td>栗は雄花と雌花が別々に咲く不思議な木です。大きな栗林で無農薬の栗拾いをおこないます。昼食は栗ご飯を炊きます。栗の不思議を学びます。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>21<br>(小)</td>
-      <td>月</td>
-      <td>【十五夜を科学する】<br>月の満ち欠け模型作り</td>
-      <td>9月25日は中秋の名月(十五夜)です。月が三日月や満月にどうして変わるのかな？月の満ち欠けが分かる立体模型を作り、月と地球、太陽の関係を学びます。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>21<br>(幼)</td>
-      <td>月</td>
-      <td>【月を科学する】<br>お月見団子とススキの梟</td>
-      <td>十五夜には豊作を祈り、お団子などを供えます。昔は月の満ち欠けで農作物を作っていました。今年の豊作を祈り、お月見団子とススキの梟を作ります。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>22</td>
-      <td>火</td>
-      <td>【スライムの不思議】<br>スーパースライムを作ろう</td>
-      <td>スーパースライムは3階から下まで届く超のびるスライムです。どうしてそんなに伸びるのかな？光るスライムも作り、スライムの不思議を実体験します。</td>
-      <td>室内研修 AM10:00～PM3:00</td>
-    </tr>
-    <tr>
-      <td>23<br>(小)</td>
-      <td>水</td>
-      <td>【釣りに挑戦】<br>ハゼ釣りに挑戦</td>
-      <td>ハゼは引きが強いので、釣りの醍醐味を味わうことができます。集中力と忍耐力を養うのに最適なスポーツです。釣れたハゼで天ぷらを賞味します。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>26</td>
-      <td>土</td>
-      <td>【からだを科学しよう】<br>フィールドアスレチック</td>
-      <td>池の上をターザンになった気分で挑戦したり、幼児から大人まで難易度の違う器具が40基もある中で楽しめる、冒険いっぱいの一日を堪能します。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>27</td>
-      <td>日</td>
-      <td>【お百姓さんの仕事】<br>稲刈りと精米</td>
-      <td>稲穂がたわわに実っています。昔ながらの方法で、カマで稲刈りに挑戦します。刈り取った稲穂で脱穀から精米まで手作業でおこないます。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-  </tbody>
-</table>
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">🌳</div>
+      <h4>野外研修</h4>
+      <p>海・山・農村・伝統工芸の施設へ出かけ、本物の自然や文化を体験します</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">⚗️</div>
+      <h4>室内実験</h4>
+      <p>化学実験・電子工作・食べ物の科学など、身近な不思議に挑戦します</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📓</div>
+      <h4>ノート作り</h4>
+      <p>研修ごとにノートを作成。専用ファイルでいつでも学びの足跡を確認できます</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🥼</div>
+      <h4>白衣で研修</h4>
+      <p>室内研修では白衣を着用。気持ちは本物の博士として研修に臨みます</p>
+    </div>
+  </div>
+</div>
 
-<h5>10月</h5>
-<table>
-  <tbody>
-    <tr>
-      <th width="5%">日</th>
-      <th width="5%">曜日</th>
-      <th width="25%">テーマ</th>
-      <th width="50%">内容</th>
-      <th width="15%">備考</th>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>土</td>
-      <td>【植物の不思議】<br>落花生とピーナッツバター</td>
-      <td>落花生は不思議な植物です。花が落ちて実が生まれます！落花生掘りをすればよく分かります。収穫した実からおいしいピーナッツバターを作ります。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>日</td>
-      <td>【渓谷の魚とBBQ】<br>マスのつかみ取り</td>
-      <td>ニジマスは渓流に生息するとてもすばしっこく泳ぎ回る魚です。川に入りマスのつかみ取りに挑戦します。捕れた魚でおいしいバーベキューをします。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>土</td>
-      <td>【海の不思議】<br>干潟の生物探検隊</td>
-      <td>秋の干潟にはいろいろな種類のカニや貝、さかな、野鳥が生息しています。多摩川干潟ネットワークの指導員により、河口の干潟の生物を調査します。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>日</td>
-      <td>【絵本のお菓子の世界】<br>ぐりとぐらのお菓子作り</td>
-      <td>ぐりとぐらの絵本を思い出してください。森の仲間と食べた「黄色い大きなカステラ」とすみれちゃんと食べた「かぼちゃプリン」、みんなで作ってみよう。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>月</td>
-      <td>【飯盒炊飯に挑戦】<br>ディキャンプ</td>
-      <td>お米を磨ぎ、薪を割り、かまどの管理をして、みんなで合わせて飯盒炊飯に挑戦します。薪で炊いたご飯、みんなで作ったカレーは最高の味です。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>17</td>
-      <td>土</td>
-      <td>【酪農の１日体験】<br>乳しぼりとバター作り</td>
-      <td>牧場を訪れ、乳しぼりに挑戦します。うまくできるかな？しぼりたての牛乳はどんな味？昔の方法でバターを作ります。とてもおいしいよ。</td>
-      <td>野外研修 AM9:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td>日</td>
-      <td>【鉄を科学する】<br>動くスライム作り</td>
-      <td>砂鉄を海岸で採取し、砂鉄入りスライムを作ります。砂鉄は鉄なのにさびないのかな？砂鉄入りスライムは磁石を近づけると角を出したり動いたりします。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>24</td>
-      <td>土</td>
-      <td>【ハロウィンを科学する】<br>お化けカボチャのペンダント</td>
-      <td>ハロウィンの魔女がつけていたお化けカボチャのペンダントを作ります。目や口がチカチカと光ります。LEDを使った電子工作の基本を学びます。</td>
-      <td>室内研修 AM10:00～PM4:00</td>
-    </tr>
-    <tr>
-      <td>25</td>
-      <td>日</td>
-      <td>【ミカンを科学する】<br>ミカン狩りとフルーツ電池</td>
-      <td>収穫したミカンでフルーツ電池を作ります。ミカンで電気！本当かな？ICオルゴールの演奏会をします。電池の仕組み、不思議を学びます。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-    <tr>
-      <td>31</td>
-      <td>土</td>
-      <td>【飛行機の仕組み】<br>スカイスクリューを飛ばそう</td>
-      <td>スカイスクリューは、三角翼ヘリコプターです。横に向けて飛ばしても真上に向かって上昇。どうして上に向かって飛ぶのでしょう？飛ぶ仕組みを調べます。</td>
-      <td>野外研修 AM9:00～PM5:00</td>
-    </tr>
-  </tbody>
-</table>
+<!-- ── NEWS ── -->
+<div class="container">
+  <div class="section-title">
+    <h2>お知らせ・活動報告</h2>
+    <p>最新の研修の様子をご報告します</p>
+    <div class="line"></div>
+  </div>
 
-<p>※上記のスケジュールは『ジュニア科学博士コース』の内容を理解していただける為の概要です。</p>
-<p>※天候などにより変更となる場合があります。(ホームページで確認して下さい)</p>
-<p>※『会員』の方には、集合・解散、持ち物など詳細が記載されている「9月〜12月スケジュール」(B4版)があります。</p>
+  <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:8px 24px;">
+    <div class="news-list">
+      <a class="news-item" href="#">
+        <span class="news-date">2026.05.28</span>
+        <span class="news-label">活動報告</span>
+        <span class="news-title">2026 バケツで稲作 — 田植えをおこないました</span>
+      </a>
+      <a class="news-item" href="#">
+        <span class="news-date">2026.05.20</span>
+        <span class="news-label">活動報告</span>
+        <span class="news-title">2026 蚕の飼育 — 孵化しました！</span>
+      </a>
+      <a class="news-item" href="#">
+        <span class="news-date">2026.04.01</span>
+        <span class="news-label">お知らせ</span>
+        <span class="news-title">2026年度 6月〜10月スケジュールを公開しました</span>
+      </a>
+    </div>
+  </div>
 
-<p style="text-align: right;">
-  問い合わせ・連絡先：日本総合教育舎<br>
-  〒169-0075 東京都新宿区高田馬場2-14-5<br>
-  TEL：03-3200-9731　FAX：03-3200-9904<br>
-  <a href="http://www.nasa.co.jp/">http://www.nasa.co.jp</a>
-</p>
+  <div style="text-align:center;margin-top:24px;">
+    <a href="#" class="btn btn-outline">お知らせ一覧を見る</a>
+  </div>
+</div>
 
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2>まずはお気軽にご相談ください</h2>
+  <p>見学・お試し参加もお受けしています。お問い合わせお待ちしております。</p>
+  <div class="cta-btns">
+    <a href="contact.html" class="btn btn-white">お問い合わせフォーム</a>
+    <a href="schedule-2026.html" class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.6);">スケジュールを見る</a>
+  </div>
+  <div class="cta-phone">
+    <span>お電話でのお問い合わせ</span><br>
+    03-3200-9731
+    <div style="font-size:0.78rem;font-weight:400;opacity:0.7;margin-top:4px;">平日 10:00〜18:00</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-section">
+      <h4>日本総合教育舎</h4>
+      <p>
+        科学する心・創造する力を培う<br>
+        サイエンスの体験学習<br><br>
+        〒169-0075<br>
+        東京都新宿区高田馬場2-14-5<br>
+        ホンダビル1F
+      </p>
+    </div>
+    <div class="footer-section">
+      <h4>メニュー</h4>
+      <ul>
+        <li><a href="jr-course.html">Jr科学博士コースとは</a></li>
+        <li><a href="schedule-2026.html">2026年スケジュール</a></li>
+        <li><a href="camp.html">サイエンスキャンプ</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>お問い合わせ</h4>
+      <p>
+        TEL：03-3200-9731<br>
+        FAX：03-3200-9904<br>
+        受付：平日 10:00〜18:00<br><br>
+        <a href="http://www.nasa.co.jp/">www.nasa.co.jp</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 株式会社日本総合教育舎. All rights reserved.
+  </div>
+</footer>
+
+<script>
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+</script>
 </body>
 </html>

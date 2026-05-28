@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ジュニア科学博士コース・スケジュール 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --jun: #2ecc71;
+      --jul: #3498db;
+      --aug: #e74c3c;
+      --sep: #e67e22;
+      --oct: #9b59b6;
+      --outdoor: #27ae60;
+      --indoor: #2980b9;
+      --special: #c0392b;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --radius: 14px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      padding: 56px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '⚗️🔭🧬🔬🌍🚀';
+      position: absolute;
+      font-size: 120px;
+      opacity: 0.04;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      letter-spacing: 12px;
+    }
+    .hero-label {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      padding: 4px 16px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+    .hero h1 span { color: #ffd700; }
+    .hero-sub {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 5px 14px;
+      font-size: 0.82rem;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    /* ── LEGEND ── */
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 16px 24px;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+
+    /* ── MAIN ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* ── MONTH SECTION ── */
+    .month-section { margin-bottom: 52px; }
+    .month-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .month-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 900;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    }
+    .month-badge .num { font-size: 1.6rem; line-height: 1; }
+    .month-badge .unit { font-size: 0.7rem; }
+    .month-title { font-size: 1.35rem; font-weight: 700; }
+    .month-count { font-size: 0.83rem; color: var(--muted); margin-top: 2px; }
+
+    .m-jun .month-badge { background: var(--jun); }
+    .m-jul .month-badge { background: var(--jul); }
+    .m-sep .month-badge { background: var(--sep); }
+    .m-oct .month-badge { background: var(--oct); }
+
+    /* ── CARDS GRID ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-top: 4px solid #ddd;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    }
+    .m-jun .card { border-top-color: var(--jun); }
+    .m-jul .card { border-top-color: var(--jul); }
+    .m-sep .card { border-top-color: var(--sep); }
+    .m-oct .card { border-top-color: var(--oct); }
+
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 16px 10px;
+    }
+    .card-date {
+      text-align: center;
+      min-width: 48px;
+      flex-shrink: 0;
+    }
+    .card-date .day { font-size: 1.6rem; font-weight: 900; line-height: 1; }
+    .card-date .weekday {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .card-date .weekday.sat { color: #2980b9; }
+    .card-date .weekday.sun, .card-date .weekday.hol { color: #e74c3c; }
+
+    .card-titles { flex: 1; }
+    .card-theme {
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .card-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .card-body {
+      padding: 0 16px 14px;
+      font-size: 0.87rem;
+      color: #374151;
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: #f9fafb;
+      border-top: 1px solid #f0f0f0;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .tag-outdoor { background: #dcfce7; color: var(--outdoor); }
+    .tag-indoor  { background: #dbeafe; color: var(--indoor); }
+    .tag-special { background: #fee2e2; color: var(--special); }
+    .tag-elem    { background: #fef9c3; color: #92400e; }
+    .tag-yoji    { background: #fce7f3; color: #9d174d; }
+
+    .time-badge {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── SUMMER CAMP ── */
+    .camp-section {
+      margin-bottom: 52px;
+    }
+    .camp-header {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: #fff;
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 20px 24px;
+    }
+    .camp-header h2 { font-size: 1.3rem; font-weight: 900; }
+    .camp-header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+    .camp-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 0;
+      border: 2px solid #f7931e;
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      overflow: hidden;
+    }
+    .camp-card {
+      background: #fff;
+      padding: 20px;
+      border-right: 1px solid #fde8d0;
+      border-bottom: 1px solid #fde8d0;
+    }
+    .camp-card:last-child { border-right: none; }
+    .camp-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .camp-label {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .camp-meta { flex: 1; }
+    .camp-dates {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #c05621;
+    }
+    .camp-location {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .camp-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .camp-body {
+      font-size: 0.85rem;
+      color: #374151;
+      line-height: 1.75;
+    }
+
+    /* ── FREE RESEARCH ── */
+    .free-section {
+      margin-bottom: 52px;
+    }
+    .free-header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 20px 24px;
+    }
+    .free-header h2 { font-size: 1.3rem; font-weight: 900; }
+    .free-header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+
+    .free-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 0;
+      border: 2px solid #764ba2;
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      overflow: hidden;
+    }
+    .free-card {
+      background: #fff;
+      padding: 20px;
+      border-right: 1px solid #e9d5ff;
+      border-bottom: 1px solid #e9d5ff;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 44px 0 32px;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e5e7eb;
+    }
+    .section-divider span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    /* ── NOTES ── */
+    .notes {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .notes h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.06em;
+    }
+    .notes ul { list-style: none; }
+    .notes li {
+      font-size: 0.87rem;
+      padding: 6px 0 6px 20px;
+      position: relative;
+      color: #374151;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .notes li:last-child { border-bottom: none; }
+    .notes li::before {
+      content: '※';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1a2e;
+      color: rgba(255,255,255,0.8);
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .footer-org {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .footer-info {
+      font-size: 0.88rem;
+      line-height: 2;
+      opacity: 0.75;
+    }
+    .footer-url a {
+      color: #ffd700;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-url a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+      .camp-cards { grid-template-columns: 1fr; }
+      .free-cards { grid-template-columns: 1fr; }
+      .camp-card { border-right: none; }
+      .free-card { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-label">2026年度プログラム</div>
+  <h1>ジュニア科学博士コース<br><span>スケジュール</span> 2026</h1>
+  <p class="hero-sub">６月 ～ 10月　｜　小学生・幼児対象</p>
+  <div class="hero-badges">
+    <div class="hero-badge"><span class="dot" style="background:var(--outdoor)"></span>野外研修</div>
+    <div class="hero-badge"><span class="dot" style="background:var(--indoor)"></span>室内研修</div>
+    <div class="hero-badge"><span class="dot" style="background:var(--special)"></span>特別研修</div>
+    <div class="hero-badge"><span class="dot" style="background:#ca8a04"></span>小学生クラス</div>
+    <div class="hero-badge"><span class="dot" style="background:#be185d"></span>幼児クラス</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ══════════════ 6月 ══════════════ -->
+  <section class="month-section m-jun">
+    <div class="month-header">
+      <div class="month-badge"><span class="num">6</span><span class="unit">月</span></div>
+      <div>
+        <div class="month-title">6月のスケジュール</div>
+        <div class="month-count">全 9 プログラム</div>
+      </div>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">6</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">ジャガイモの秘密</div>
+            <div class="card-sub">ポテトチップを作ろう</div>
+          </div>
+        </div>
+        <div class="card-body">掘ったジャガイモで大好きなポテトチップを作ります。ジャガイモはトマトやナスと同じ仲間です。ジャガイモの秘密を学びます。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">7</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">養蚕農家を訪ねて</div>
+            <div class="card-sub">カイコの飼育と糸くり</div>
+          </div>
+        </div>
+        <div class="card-body">養蚕農家では50,000頭もカイコを飼育しています。カイコに餌をあげ養蚕農家の一日を体験します。繭玉からスピンドルで糸くりにも挑戦します。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">13</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">空気の科学</div>
+            <div class="card-sub">ホバークラフト作り</div>
+          </div>
+        </div>
+        <div class="card-body">ホバークラフトには車輪がありません。空気の力で浮上して走る便利な乗り物です。どのような仕組みか、ホバークラフトを作り、走らせてみよう。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="time-badge">🕙 10:00〜15:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">14</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">タイドプールの水族館</div>
+            <div class="card-sub">ヤドカリの宿かえ</div>
+          </div>
+        </div>
+        <div class="card-body">ヤドカリは大きくなるにつれ、宿である貝殻を替えていきます。宿かえの様子を実験、観察します。自宅でも飼育できるオカヤドカリを育ててみよう。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">20</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">釣りを科学する</div>
+            <div class="card-sub">マス釣りに挑戦</div>
+          </div>
+        </div>
+        <div class="card-body">ニジマスは食いつきがよく、引きも良いため、「釣ってたのし・食べておいし」魚です。マス釣り池で釣りの醍醐味と釣ったマスの塩焼きを体験します。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">21</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">ロボットの科学</div>
+            <div class="card-sub">ＳＦロボを作ろう</div>
+          </div>
+        </div>
+        <div class="card-body">宇宙からやってきたＳＦロボは二本足です。変速ギヤーとクランクの動きによってユニークにトコトコ歩きます。二足歩行の仕組みを学びます。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="tag tag-elem">小 小学生</span>
+          <span class="time-badge">🕙 10:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">21</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">走る仕組みを科学する</div>
+            <div class="card-sub">スーパーバイク作り</div>
+          </div>
+        </div>
+        <div class="card-body">スーパーバイクは後輪をプーリーで回して走ります。ワイドタイヤを装備し、どこでもスイスイ走ります。電池とモーターで走る仕組みを学びます。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="tag tag-yoji">幼 幼児</span>
+          <span class="time-badge">🕙 10:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">27</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">カンテラを作って</div>
+            <div class="card-sub">鍾乳洞探検隊</div>
+          </div>
+        </div>
+        <div class="card-body">空缶を利用して、オランダから渡来した昔の懐中電灯カンテラを作ります。カンテラの光をたよりに鍾乳洞を探検します。なにか不思議なものを発見！</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">28</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">植物の秘密</div>
+            <div class="card-sub">トウモロコシ狩り</div>
+          </div>
+        </div>
+        <div class="card-body">トウモロコシはイネ科の植物です。ひげは何のためにあるの？トウモロコシ狩りをして秘密を調べます。おいしいポップコーンも作ります。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 7月 ══════════════ -->
+  <section class="month-section m-jul">
+    <div class="month-header">
+      <div class="month-badge"><span class="num">7</span><span class="unit">月</span></div>
+      <div>
+        <div class="month-title">7月のスケジュール</div>
+        <div class="month-count">全 9 プログラム</div>
+      </div>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">4</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">光ファイバーの星座</div>
+            <div class="card-sub">七夕のプラネタリウム作り</div>
+          </div>
+        </div>
+        <div class="card-body">琴座の織り姫(ベガ)、鷲座の彦星(アルタイル)が瞬いています。白鳥座のデネブを加えて夏の大三角です。光ファイバーで七夕のプラネタリウムを作ります。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="time-badge">🕙 10:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">5</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">ブルーベリーの秘密</div>
+            <div class="card-sub">ブルーベリー摘み</div>
+          </div>
+        </div>
+        <div class="card-body">農園でブルーベリー摘みに挑戦します。摘み取ったブルーベリーで色が変わる化学実験をします。実験の後はおいしい「ブルーベリーシェイク」で乾杯！</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">11</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">渓谷の生物</div>
+            <div class="card-sub">沢ガニを探そう</div>
+          </div>
+        </div>
+        <div class="card-body">沢ガニは水のきれいな渓谷にしか生息しないカニです。昼間は石の下などに隠れています。沢ガニがたくさんいる秘密の渓谷へ行ってみよう。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">12</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">ドライアイスの化学</div>
+            <div class="card-sub">マイナス77℃の世界</div>
+          </div>
+        </div>
+        <div class="card-body">冷たいドライアイスでふかふかのカップケーキやレモンソーダのおやつを作ります。マイナス77度を実感、バナナで釘も打ってみよう！</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="time-badge">🕙 10:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">18</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">気体の膨張</div>
+            <div class="card-sub">ポンポン蒸気船作り</div>
+          </div>
+        </div>
+        <div class="card-body">銅のパイプを使ってボイラーを作ります。ろうそくの燃料でポンポンと軽快に走ります。走るメカニズムについて学びます。昔懐かしい物理のおもちゃです。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="tag tag-elem">小 小学生</span>
+          <span class="time-badge">🕙 10:00〜15:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">18</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">走る不思議を科学する</div>
+            <div class="card-sub">マークトウェイン号作り</div>
+          </div>
+        </div>
+        <div class="card-body">トムソーヤの冒険や、アメリカのミシシッピー川を今も航行している外輪船を作ります。ディズニーランドのアトラクションでも乗船したことがありますか？</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="tag tag-yoji">幼 幼児</span>
+          <span class="time-badge">🕙 10:00〜15:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">19</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">氷と塩の科学</div>
+            <div class="card-sub">アイスクリーム作り</div>
+          </div>
+        </div>
+        <div class="card-body">水は0℃で氷になります。氷に塩を混ぜると何度になるかな？氷と塩の不思議な力を利用しておいしいアイスクリームを作ります。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="time-badge">🕙 10:00〜15:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">20</div><div class="weekday hol">月曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">花火を化学する</div>
+            <div class="card-sub">線香花火を作ろう</div>
+          </div>
+        </div>
+        <div class="card-body">夏の風物詩「線香花火」を作ります。花火のキラキラは鉄が燃えているのです。鉄が燃える！花火のきれいな色は！燃焼と炎色反応の化学を学びます。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="tag tag-elem">小 小学生</span>
+          <span class="time-badge">🕙 10:00〜15:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">20</div><div class="weekday hol">月曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">鏡の不思議</div>
+            <div class="card-sub">不思議な万華鏡を作ろう</div>
+          </div>
+        </div>
+        <div class="card-body">鏡が3枚、4枚の変わった万華鏡を作ります。万華鏡は光の屈折と鏡の反射による芸術です。特殊な液体で幾何学模様が見える不思議な世界をのぞきます。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="tag tag-yoji">幼 幼児</span>
+          <span class="time-badge">🕙 10:00〜15:00</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 夏合宿 ══════════════ -->
+  <div class="section-divider"><span>🏕️ 特別企画</span></div>
+  <section class="camp-section">
+    <div class="camp-header">
+      <h2>🏕️ 2026 夏合宿</h2>
+      <p>7月27日〜8月8日　｜　自然の中でサイエンスを体験する宿泊プログラム</p>
+    </div>
+    <div class="camp-cards">
+
+      <div class="camp-card">
+        <div class="camp-card-top">
+          <div class="camp-label">A</div>
+          <div class="camp-meta">
+            <div class="camp-dates">7月27日（日）〜 7月29日（火）</div>
+            <div class="camp-location">📍 群馬県 甘楽</div>
+          </div>
+        </div>
+        <div class="camp-title">里山とサイエンス・ラボ</div>
+        <div class="camp-body">甘楽は養蚕の歴史がある田舎町です。古都、甘楽でサイエンス。3Dカメラで撮影し立体的に見えるステレオビューアを作ります。繭玉人形や郷土料理も作り田舎の生活を体験します。里山、甘楽はカブトムシの楽園です。秘密の薬とトラップを作りカブトムシ取りに挑戦します。</div>
+      </div>
+
+      <div class="camp-card">
+        <div class="camp-card-top">
+          <div class="camp-label">B</div>
+          <div class="camp-meta">
+            <div class="camp-dates">8月2日（日）〜 8月4日（火）</div>
+            <div class="camp-location">📍 長野県 八ヶ岳</div>
+          </div>
+        </div>
+        <div class="camp-title">八ヶ岳高原でソーラーカー</div>
+        <div class="camp-body">八ヶ岳高原の太陽を浴び、ソーラーパネルで発電するソーラーカーを作ります。発電した電力はコンデンサーで蓄電し、曇りの日でも走行できるハイブリッドカーです。アメリカで多く作られた『T型フォード』をモデルに作ります。</div>
+      </div>
+
+      <div class="camp-card">
+        <div class="camp-card-top">
+          <div class="camp-label">C</div>
+          <div class="camp-meta">
+            <div class="camp-dates">8月2日（日）〜 8月4日（火）</div>
+            <div class="camp-location">📍 長野県 八ヶ岳　<span style="font-size:0.78rem;color:#c05621">※小学生のみ</span></div>
+          </div>
+        </div>
+        <div class="camp-title">天体望遠鏡で惑星観測</div>
+        <div class="camp-body">標高1300mの八ヶ岳高原で、ケプラー式屈折式天体望遠鏡を作り天体観測します。口径60mm・焦点距離700mm・倍率56倍の本格的な望遠鏡で、土星の輪も観測できます。天体観測のベースになる望遠鏡です。</div>
+      </div>
+
+      <div class="camp-card">
+        <div class="camp-card-top">
+          <div class="camp-label">D</div>
+          <div class="camp-meta">
+            <div class="camp-dates">8月6日（木）〜 8月8日（土）</div>
+            <div class="camp-location">📍 長野県 菅平高原</div>
+          </div>
+        </div>
+        <div class="camp-title">サイエンス・キャンプ</div>
+        <div class="camp-body">標高1300mの菅平高原で、テントを設営し寝袋に潜ってキャンプ生活を体験します。薪割り・火起こし・飯ごう炊飯でおいしい食事を作ります。アメリカ西部の伝統的なキャンプS'moreパーティーや色変わりするキャンプファイヤーも！</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 自由研究（8月） ══════════════ -->
+  <section class="free-section">
+    <div class="free-header">
+      <h2>🔬 2026 サイエンスの自由研究　〈8月〉</h2>
+      <p>8月21日（金）〜23日（日）　｜　小学生対象・室内研修　10:00〜16:00</p>
+    </div>
+    <div class="free-cards">
+
+      <div class="free-card">
+        <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;">
+          <div style="text-align:center;min-width:48px;">
+            <div style="font-size:1.5rem;font-weight:900;line-height:1;">21</div>
+            <div style="font-size:0.7rem;color:var(--muted);">金曜日</div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;">東京を科学する</div>
+            <div style="font-size:0.8rem;color:var(--muted);">東京の立体地図作り</div>
+          </div>
+        </div>
+        <div style="font-size:0.87rem;color:#374151;line-height:1.75;">東京都は東西に細長い形をしています。西は2017mの雲取山から、東は0mの東京湾岸まで起伏に富んだ地形です。立体地図を作るとよく理解できます。</div>
+        <div style="margin-top:10px;"><span class="tag tag-elem">小 小学生</span></div>
+      </div>
+
+      <div class="free-card">
+        <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;">
+          <div style="text-align:center;min-width:48px;">
+            <div style="font-size:1.5rem;font-weight:900;line-height:1;">22</div>
+            <div style="font-size:0.7rem;color:var(--muted);">土曜日</div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;">太陽系の惑星</div>
+            <div style="font-size:0.8rem;color:var(--muted);">10億分の１の天体模型作り</div>
+          </div>
+        </div>
+        <div style="font-size:0.87rem;color:#374151;line-height:1.75;">太陽系には8つの惑星が太陽の周りを回っています。1番大きな惑星木星は地球の約11倍もあります。10億分の1の太陽系惑星模型を作り、実感します。</div>
+        <div style="margin-top:10px;"><span class="tag tag-elem">小 小学生</span></div>
+      </div>
+
+      <div class="free-card">
+        <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;">
+          <div style="text-align:center;min-width:48px;">
+            <div style="font-size:1.5rem;font-weight:900;line-height:1;">23</div>
+            <div style="font-size:0.7rem;color:var(--muted);">日曜日</div>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.95rem;">音の不思議</div>
+            <div style="font-size:0.8rem;color:var(--muted);">トランジスタラジオ作り</div>
+          </div>
+        </div>
+        <div style="font-size:0.87rem;color:#374151;line-height:1.75;">アンテナから、トランジスタ、バリコンなどの部品を組み立て本格的なラジオを作ります。自作のラジオから声や音楽が聞こえたら…大感激ですね。</div>
+        <div style="margin-top:10px;"><span class="tag tag-elem">小 小学生</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 9月 ══════════════ -->
+  <div class="section-divider"><span>秋のプログラム</span></div>
+  <section class="month-section m-sep">
+    <div class="month-header">
+      <div class="month-badge"><span class="num">9</span><span class="unit">月</span></div>
+      <div>
+        <div class="month-title">9月のスケジュール</div>
+        <div class="month-count">全 10 プログラム</div>
+      </div>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">6</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">ウミガメの不思議 ①</div>
+            <div class="card-sub">ウミガメを海に帰そう</div>
+          </div>
+        </div>
+        <div class="card-body">6月〜8月の静岡県中田島砂丘はウミガメが産卵に来る海岸です。9月になると卵から一斉にふ化します。よちよち歩きのウミガメを海に帰してあげましょう。</div>
+        <div class="card-foot">
+          <span class="tag tag-special">⭐ 特別研修</span>
+          <span class="time-badge">📄 別紙参照</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">12</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">フルーツの科学</div>
+            <div class="card-sub">梨狩りと梨コンポーネント</div>
+          </div>
+        </div>
+        <div class="card-body">梨は一番古くから栽培されている果実です。弥生時代の登呂遺跡からも「梨の種」が出土しています。梨狩りをして収穫した梨で梨コンポーネントを作ります。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">13</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">ウミガメの不思議 ②</div>
+            <div class="card-sub">ウミガメを海に帰そう</div>
+          </div>
+        </div>
+        <div class="card-body">放流したウミガメは黒潮に乗ってメキシコ沖まで行き、また赤道付近を横断し約20年後にこの砂丘に戻ってきます。ウミガメの不思議を体験します。</div>
+        <div class="card-foot">
+          <span class="tag tag-special">⭐ 特別研修</span>
+          <span class="time-badge">📄 別紙参照</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">20</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">栗拾いに挑戦</div>
+            <div class="card-sub">栗拾いと栗ご飯</div>
+          </div>
+        </div>
+        <div class="card-body">栗は雄花と雌花が別々に咲く不思議な木です。大きな栗林で無農薬の栗拾いをおこないます。昼食は栗ご飯を炊きます。栗の不思議を学びます。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">21</div><div class="weekday hol">月曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">十五夜を科学する</div>
+            <div class="card-sub">月の満ち欠け模型作り</div>
+          </div>
+        </div>
+        <div class="card-body">9月25日は中秋の名月(十五夜)です。月が三日月や満月にどうして変わるのかな？月の満ち欠けが分かる立体模型を作り、月と地球、太陽の関係を学びます。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="tag tag-elem">小 小学生</span>
+          <span class="time-badge">🕙 10:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">21</div><div class="weekday hol">月曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">月を科学する</div>
+            <div class="card-sub">お月見団子とススキの梟</div>
+          </div>
+        </div>
+        <div class="card-body">十五夜には豊作を祈り、お団子などを供えます。昔は月の満ち欠けで農作物を作っていました。今年の豊作を祈り、お月見団子とススキの梟を作ります。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="tag tag-yoji">幼 幼児</span>
+          <span class="time-badge">🕙 10:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">22</div><div class="weekday">火曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">スライムの不思議</div>
+            <div class="card-sub">スーパースライムを作ろう</div>
+          </div>
+        </div>
+        <div class="card-body">スーパースライムは3階から下まで届く超のびるスライムです。どうしてそんなに伸びるのかな？光るスライムも作り、スライムの不思議を実体験します。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="time-badge">🕙 10:00〜15:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">23</div><div class="weekday">水曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">釣りに挑戦</div>
+            <div class="card-sub">ハゼ釣りに挑戦</div>
+          </div>
+        </div>
+        <div class="card-body">ハゼは引きが強いので、釣りの醍醐味を味わうことができます。集中力と忍耐力を養うのに最適なスポーツです。釣れたハゼで天ぷらを賞味します。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="tag tag-elem">小 小学生</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">26</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">からだを科学しよう</div>
+            <div class="card-sub">フィールドアスレチック</div>
+          </div>
+        </div>
+        <div class="card-body">池の上をターザンになった気分で挑戦したり、幼児から大人まで難易度の違う器具が40基もある中で楽しめる、冒険いっぱいの一日を堪能します。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">27</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">お百姓さんの仕事</div>
+            <div class="card-sub">稲刈りと精米</div>
+          </div>
+        </div>
+        <div class="card-body">稲穂がたわわに実っています。昔ながらの方法で、カマで稲刈りに挑戦します。刈り取った稲穂で脱穀から精米まで手作業でおこないます。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 10月 ══════════════ -->
+  <section class="month-section m-oct">
+    <div class="month-header">
+      <div class="month-badge"><span class="num">10</span><span class="unit">月</span></div>
+      <div>
+        <div class="month-title">10月のスケジュール</div>
+        <div class="month-count">全 10 プログラム</div>
+      </div>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">3</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">植物の不思議</div>
+            <div class="card-sub">落花生とピーナッツバター</div>
+          </div>
+        </div>
+        <div class="card-body">落花生は不思議な植物です。花が落ちて実が生まれます！落花生掘りをすればよく分かります。収穫した実からおいしいピーナッツバターを作ります。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">4</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">渓谷の魚とBBQ</div>
+            <div class="card-sub">マスのつかみ取り</div>
+          </div>
+        </div>
+        <div class="card-body">ニジマスは渓流に生息するとてもすばしっこく泳ぎ回る魚です。川に入りマスのつかみ取りに挑戦します。捕れた魚でおいしいバーベキューをします。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">10</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">海の不思議</div>
+            <div class="card-sub">干潟の生物探検隊</div>
+          </div>
+        </div>
+        <div class="card-body">秋の干潟にはいろいろな種類のカニや貝、さかな、野鳥が生息しています。多摩川干潟ネットワークの指導員により、河口の干潟の生物を調査します。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">11</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">絵本のお菓子の世界</div>
+            <div class="card-sub">ぐりとぐらのお菓子作り</div>
+          </div>
+        </div>
+        <div class="card-body">ぐりとぐらの絵本を思い出してください。森の仲間と食べた「黄色い大きなカステラ」とすみれちゃんと食べた「かぼちゃプリン」、みんなで作ってみよう。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="time-badge">🕙 10:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">12</div><div class="weekday hol">月曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">飯盒炊飯に挑戦</div>
+            <div class="card-sub">ディキャンプ</div>
+          </div>
+        </div>
+        <div class="card-body">お米を磨ぎ、薪を割り、かまどの管理をして、みんなで合わせて飯盒炊飯に挑戦します。薪で炊いたご飯、みんなで作ったカレーは最高の味です。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">17</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">酪農の１日体験</div>
+            <div class="card-sub">乳しぼりとバター作り</div>
+          </div>
+        </div>
+        <div class="card-body">牧場を訪れ、乳しぼりに挑戦します。うまくできるかな？しぼりたての牛乳はどんな味？昔の方法でバターを作ります。とてもおいしいよ。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">18</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">鉄を科学する</div>
+            <div class="card-sub">動くスライム作り</div>
+          </div>
+        </div>
+        <div class="card-body">砂鉄を海岸で採取し、砂鉄入りスライムを作ります。砂鉄は鉄なのにさびないのかな？砂鉄入りスライムは磁石を近づけると角を出したり動いたりします。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">24</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">ハロウィンを科学する</div>
+            <div class="card-sub">お化けカボチャのペンダント</div>
+          </div>
+        </div>
+        <div class="card-body">ハロウィンの魔女がつけていたお化けカボチャのペンダントを作ります。目や口がチカチカと光ります。LEDを使った電子工作の基本を学びます。</div>
+        <div class="card-foot">
+          <span class="tag tag-indoor">🏠 室内研修</span>
+          <span class="time-badge">🕙 10:00〜16:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">25</div><div class="weekday sun">日曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">ミカンを科学する</div>
+            <div class="card-sub">ミカン狩りとフルーツ電池</div>
+          </div>
+        </div>
+        <div class="card-body">収穫したミカンでフルーツ電池を作ります。ミカンで電気！本当かな？ICオルゴールの演奏会をします。電池の仕組み、不思議を学びます。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-date"><div class="day">31</div><div class="weekday sat">土曜日</div></div>
+          <div class="card-titles">
+            <div class="card-theme">飛行機の仕組み</div>
+            <div class="card-sub">スカイスクリューを飛ばそう</div>
+          </div>
+        </div>
+        <div class="card-body">スカイスクリューは、三角翼ヘリコプターです。横に向けて飛ばしても真上に向かって上昇。どうして上に向かって飛ぶのでしょう？飛ぶ仕組みを調べます。</div>
+        <div class="card-foot">
+          <span class="tag tag-outdoor">🌿 野外研修</span>
+          <span class="time-badge">🕘 9:00〜17:00</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ 注意事項 ══════════════ -->
+  <div class="notes">
+    <h3>ご注意・ご案内</h3>
+    <ul>
+      <li>上記のスケジュールは「ジュニア科学博士コース」の内容を理解していただけるための概要です。</li>
+      <li>天候などにより変更となる場合があります。（ホームページでご確認ください）</li>
+      <li>「会員」の方には、集合・解散、持ち物など詳細が記載されている「9月〜12月スケジュール」(B4版)があります。</li>
+      <li>（小）は小学生のみ、（幼）は幼児のみのクラスです。（小）（幼）のないコースは小学・幼児共通の内容です。</li>
+    </ul>
+  </div>
+
+</div><!-- /container -->
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-org">日本総合教育舎</div>
+  <div class="footer-info">
+    〒169-0075　東京都新宿区高田馬場 2-14-5<br>
+    TEL：03-3200-9731　／　FAX：03-3200-9904
+  </div>
+  <div class="footer-url" style="margin-top:12px;">
+    <a href="http://www.nasa.co.jp/" target="_blank">http://www.nasa.co.jp</a>
+  </div>
+</footer>
+
+</body>
+</html>
